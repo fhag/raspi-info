@@ -1,0 +1,15 @@
+cr2020-04-07-103111.txt
+Weisses Netzteil, SBS 1m Kabel running for 10.0 minutes
+Core data - After  17.3 seconds  | Throttled: 1010000000000000101 | Temperature: 44.5'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After  18.4 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 260.1 seconds  | Throttled: 1010000000000000101 | Temperature: 45.6'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 318.1 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 377.2 seconds  | Throttled: 1010000000000000101 | Temperature: 44.5'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 378.3 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 438.4 seconds  | Throttled: 1010000000000000101 | Temperature: 44.5'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 439.4 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 497.5 seconds  | Throttled: 1010000000000000101 | Temperature: 44.5'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 498.5 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 499.6 seconds  | Throttled: 1010000000000000101 | Temperature: 44.5'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 557.6 seconds  | Throttled: 1010000000000000101 | Temperature: 45.1'C | Voltage: 1.2000V | Frequency: 0.60GHz
+Core data - After 559.7 seconds  | Throttled: 1010000000000000101 | Temperature: 44.0'C | Voltage: 1.2000V | Frequency: 0.60GHz
