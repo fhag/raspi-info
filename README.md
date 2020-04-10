@@ -1,4 +1,4 @@
-<small id='version'>v0.0.9</small>
+<small id='version'>v0.0.10</small>
 <!--
 @author: GFI
 FHAG
@@ -49,7 +49,7 @@ combinations. The printout and saved text shows if *under-voltage* is detected,
 
 The created file can be parsed for some statistical analysis the lines are fixed length.
 
-**how to use**
+**How to use**
 
 - setup = Description of setup is added to file name and stored to textfile.
 If empty the user is prompted to input setup information.
@@ -73,7 +73,7 @@ If `setup` is an empty string (''), an input is requested after start.
 Enter test setup:
 ```
 
-**Sample Output**
+<h4 id='raspisample'>Sample output</h4>
 
 command line start
 
@@ -111,7 +111,7 @@ Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | t
 Simulate workload on all CPU core for Raspberry Pi.
 This code is independent of platform and was also tested on windows.
 
-**how to use**
+**How to use**
 
 Used in <a href="#raspi">raspi.py</a> and produces same output.
 Can also be invoked in python3:
@@ -123,6 +123,9 @@ Enter test setup:second test
 Start CPU load delayed by 5 seconds
    0. Core data - After   0.0 seconds | CPU:  ok (...)
 ```
+for sample output see `raspi.py` 
+<a href="#raspisample">raspi.py output sample</a>
+
 <a href='#raspiinfo'>return to top</a>
 
 ---
@@ -136,7 +139,7 @@ Code is independent of platform and was tested Rasbian and on Windows.
 - Uses up to all cores of multi-core processors
 - function to simulate load can be defined
 
-**how to use**
+**How to use**
 
 in python
 
@@ -151,7 +154,7 @@ in python
     load_cpus(**context)
 ```
 
-sample output
+**Sample output**
 ```console
 Start test for 5 seconds on 2 CPUs with 60% load
 Load CPUs terminated after 5.12 sec
@@ -164,7 +167,7 @@ Load CPUs terminated after 5.12 sec
 
 Identify your Raspberry and show all key information on screen. Save the same information in file `id.txt` .
 
-**how to use**
+**How to use**
 
 from commandline: `$ python3 id.py`
 
@@ -173,7 +176,7 @@ or add to crontab to run at startup
 # m h  dom mon dow   command
 @reboot python3.7 id.py
 ```
-**sample output**
+**Sample output**
 
 ```
  $ python3 id.py
@@ -211,7 +214,7 @@ Helps keeping track of version on different computer. Looks for `version`
 keyword in text files and for a version number of format `0.0.1`.
 Shows all text files with version numbers.
 
-**how to use**
+**How to use**
 
 From commandline: `$ python3 v.py`
 
@@ -247,7 +250,7 @@ ImageFont.truetype('Vera')
 ```
 
 
-**how to use**
+**How to use**
 
 From commandline: `$ python3 showfonts.py`
 
