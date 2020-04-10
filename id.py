@@ -13,14 +13,14 @@ from platform import uname
 from os import popen
 import psutil
 
-__version__ = '0.1.1'
+__version__ = '0.1.4'
 
 
 # Raspi 4 shows BCM2835 instead of BCM2711
 RASPIS = [
-    {'Raspberry Pi 4 Model B 1GB': ['BCM2835', '1500', '1024']},
-    {'Raspberry Pi 4 Model B 2GB': ['BCM2835', '1500', '2048']},
-    {'Raspberry Pi 4 Model B 4GB': ['BCM2835', '1500', '4096']},
+    {'Raspberry Pi 4 Model B 1gigabytes': ['BCM2835', '1500', '1024']},
+    {'Raspberry Pi 4 Model B 2gigabytes': ['BCM2835', '1500', '2048']},
+    {'Raspberry Pi 4 Model B 4gigabytes': ['BCM2835', '1500', '4096']},
     {'Raspberry Pi 3 Model B+': ['1400', '1024']},
     {'Raspberry Pi 3 Model A+': ['1400', '512']},
     {'Raspberry Pi 3 Model B': ['1200', '1024']},
@@ -76,7 +76,7 @@ def pi_camera():
 
 
 def pretty_size(nr_of_bytes) -> str:
-    '''return string in KB, MB or GB'''
+    '''return string in KB, megabytes or gigabytes'''
     extensions = ['GB', 'MB', 'KB', 'B']
     nrbytes = int(nr_of_bytes) / 1024 ** 3
     for extension in extensions:
@@ -131,30 +131,30 @@ def disk_space() -> str:
 
 
 def _get_mem():
-    '''Return RAM in MB'''
-    MB = 1048576
-    GB = MB * 1024
+    '''Return RAM in megabytes'''
+    megabytes = 1048576
+    gigabytes = megabytes * 1024
     with popen('vcgencmd get_mem arm') as file:
         line1 = file.readline()
     with popen('vcgencmd get_mem gpu') as file:
         line2 = file.readline()
     try:
-        arm_mem = int(line1[4:-2]) * MB
-        gpu_mem = int(line2[4:-2]) * MB
+        arm_mem = int(line1[4:-2]) * megabytes
+        gpu_mem = int(line2[4:-2]) * megabytes
         virt_mem = psutil.virtual_memory().total
-        if virt_mem > GB:
-            tot_mem = int(round((virt_mem + gpu_mem) / GB, 0) * GB)
+        if virt_mem > gigabytes:
+            tot_mem = int(round((virt_mem + gpu_mem) / gigabytes, 0) * gigabytes)
         else:
             tot_mem = arm_mem + gpu_mem
     except ValueError:
         tot_mem = psutil.virtual_memory().total
-    return int(tot_mem / MB)
+    return int(tot_mem / megabytes)
 
 
 def memory_info() -> str:
     '''Return formatted total memory'''
-    MB = 1048576
-    return f'Total memory       : {pretty_size(_get_mem() * MB)}\n'
+    megabytes = 1048576
+    return f'Total memory       : {pretty_size(_get_mem() * megabytes)}\n'
 
 
 def cpu_info() -> str:
@@ -238,6 +238,7 @@ def net_info():
                     info_txts.append(ftext)
     return '\n'.join(info_txts) + '\n'
 
+
 def net_active():
     '''True if internet available'''
     try:
@@ -246,12 +247,13 @@ def net_active():
     except Exception:
         return False
 
+
 def get_allinfo():
     '''Return string with all computer info'''
     _ = python_version()
-    nr = 80
-    id_version = f' id.py {__version__} -- {time.ctime()} '.center(nr, '-')
-    txt = (f' {welcome()} '.center(nr, '-') + '\n'
+    num = 80
+    id_version = f' id.py {__version__} -- {time.ctime()} '.center(num, '-')
+    txt = (f' {welcome()} '.center(num, '-') + '\n'
            f'Computer Model     : {raspi_model()}'
            f'{memory_info()}'
            f'{disk_space()}'
@@ -266,16 +268,16 @@ def get_allinfo():
            )
     return txt
 
+
 def main():
     '''Show data only if internet connection established'''
     while not net_active():
         time.sleep(1)
-    else:
-        txt = get_allinfo()
-        print(txt)
-        with open('id.txt', 'w+') as file:
-            for line in txt:
-                file.write(line)
+    txt = get_allinfo()
+    print(txt)
+    with open('id.txt', 'w+') as file:
+        for line in txt:
+            file.write(line)
 
 
 if __name__ == '__main__':
