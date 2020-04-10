@@ -2,9 +2,10 @@
 """
 Created on Tue Apr  7 13:31:33 2020
 
-@author: annet
-"""
+@author: GFI
 
+requires Python 3.6 or later
+"""
 import math
 import time
 import random
@@ -12,7 +13,7 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from threading import Thread
 
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 
 def load_single_cpu(timeout=5, loadpct=1.00, load_func=None, fname=''):

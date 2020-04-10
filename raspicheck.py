@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+@author: GFI
 
+requires Python 3.6 or later
+'''
 import subprocess
 import string
 from psutil import time, cpu_freq, cpu_percent
@@ -7,7 +11,7 @@ import unicodedata
 from threading import Thread
 from raspiload import load_cpus
 
-__version__ = '0.0.14'
+__version__ = '0.0.15'
 
 
 class RaspiCheck():
@@ -58,7 +62,7 @@ class RaspiCheck():
                  lambda x: ('yes' if int(x, base=16) & 0b1 else 'no')),
                 ('vcgencmd get_throttled', 'Soft temp limit: {:>8s}', 'throttle4',
                  lambda x: ('active' if int(x, base=16) & 0b1000 else 'inactive')),
-                 ('vcgencmd measure_temp', 'Temp: {:>7s}', 'temp', 
+                 ('vcgencmd measure_temp', 'Temp: {:>7s}', 'temp',
                  lambda x: x.replace("'", "°")),
                 ('vcgencmd measure_volts core', 'Volt: {:>9s}', 'volt', str),
                 ('vcgencmd measure_clock arm', 'Freq: {:3,.2f}GHz', 'freq',
@@ -103,13 +107,13 @@ class RaspiCheck():
 
     def main(self):
         if self.setup == '':
-            self.setup = input('Enter test setup:')          
+            self.setup = input('Enter test setup:')
         check_context = self.check_context.copy()
         check_context['setup'] = self.setup
         check_context['timeout'] = self.timeout
         load_context = self.load_context.copy()
         load_context['timeout'] = int(self.timeout / 2)
-        load_context['delay'] = int(self.timeout / 2)       
+        load_context['delay'] = int(self.timeout / 2)
         start_time = time.time()
         runtxt = f'{self.setup!r} running for ' \
                  f'{check_context["timeout"]/60:4.1f} minutes'

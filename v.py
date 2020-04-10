@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 Print all py source codes and versions
-"""
 
+@author: GFI
+
+requires Python 3.6 or later
+"""
 import os
 import re
 from collections import defaultdict
 
-__version__ = '1.0.16'
+__version__ = '1.0.17'
+
 
 re_vnr = re.compile('(\d{1,3}\.\d{1,3}\.\d{1,3})')
 re_version = re.compile('(?i)version')

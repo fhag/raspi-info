@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-'''List all available truetype fonts in your raspberry'''
+'''
+List all available truetype fonts in your raspberry
+@author: GFI
 
+requires Python 3.6 or later
+'''
 import os
 
 path = '/usr/share/fonts/truetype'

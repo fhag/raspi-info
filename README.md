@@ -1,11 +1,15 @@
-<small id='version'>v0.0.6</small>
+<small id='version'>v0.0.7</small>
+<!--
+@author: GFI
+FHAG
+-->
 <h1 id='raspiinfo' style='color:DodgerBlue'><b>raspi-info.py</b></h1>
-Utilies to collect information about your Raspberry and 
+Utilies to collect information about your Raspberry and
 monitor CPU status under load.
 This code was developped to check power supplies and cables of Raspberry Pi 3+,
 as my Raspi lost sometimes the WiFi Connection or crashed without reason.
-It turned out, that due to a bad power supply and cable the processor was 
-throttled. 
+It turned out, that due to a bad power supply and cable the processor was
+throttled.
 
 The actual state can be read out with `vcgencmd get_throttled`. For testing
  different combinations of power supply and cables this code was used.
@@ -13,7 +17,7 @@ The actual state can be read out with `vcgencmd get_throttled`. For testing
 Learnings are:
 - Do not rely on indications of power supply: 5v, 2.5A indications looks fine,
  but a poor power supply can slow down your Raspi.
-- Strong power supply do not automatically provide the stable power 
+- Strong power supply do not automatically provide the stable power
 required by your Raspi.
 - Try different cables in combination. Expensive cables are not the best.
 - Under heavy CPU load a throttling of Raspi CPUs is happening more often
@@ -37,16 +41,16 @@ required by your Raspi.
 **Usage**
 
 Run this code with different power supplies and cables to find weak
-combinations. The printout and saved text shows if *under-voltage* is detected, 
+combinations. The printout and saved text shows if *under-voltage* is detected,
 *Arm frequency* is capped, CPU is *throttled* or a "Soft temperature limit"
- is active. Testing during 10 minutes, whereas the last half is tested under 
+ is active. Testing during 10 minutes, whereas the last half is tested under
  heavy CPU load, shows failing cases.
 
 The created file can be parsed for some statistical analysis the lines are fixed length.
 
 **how to use**
 
-- setup = Description of setup is added to file name and stored to textfile. 
+- setup = Description of setup is added to file name and stored to textfile.
 If empty the user is prompted to input setup information.
 - timeout = number of seconds to apply checking.
 
@@ -103,7 +107,7 @@ Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | t
 ---
 <h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
 
-Simulate workload on all CPU core for Raspberry Pi. 
+Simulate workload on all CPU core for Raspberry Pi.
 This code is independent of platform and was also tested on windows.
 
 **how to use**
@@ -125,7 +129,7 @@ Start CPU load delayed by 5 seconds
 
 **Usage**
 
-Simulate workload on all CPU cores for Raspberry Pi. 
+Simulate workload on all CPU cores for Raspberry Pi.
 Code is independent of platform and was tested Rasbian and on Windows.
 
 - Increases CPU load to specific level
@@ -174,7 +178,7 @@ $ python3 showfonts.py
 ---
 <h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
 
-Helps keeping track of version on different computer. Looks for `version` 
+Helps keeping track of version on different computer. Looks for `version`
 keyword in text files and for a version number of format `0.0.1`.
 Shows all text files with version numbers.
 
