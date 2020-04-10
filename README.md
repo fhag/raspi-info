@@ -1,5 +1,5 @@
-<small id='version'>v0.0.4</small>
-# raspi-info
+<small id='version'>v0.0.5</small>
+<h1 id='raspiinfo' style='color:DodgerBlue'><b>raspi-info.py</b></h1>
 Utilies to collect information about your Raspberry and 
 monitor CPU status under load.
 This code was developped to check power supplies and cables of Raspberry Pi 3+,
@@ -19,30 +19,35 @@ required by your Raspi.
 - Under heavy CPU load a throttling of Raspi CPUs is happening more often
 
 
-# **Table of Contents**
+<h2 style='color:DodgerBlue'><b>Table of contents</b></h2>
+
 1. <a href='#raspi'>raspi.py</a>
 2. <a href='#raspicheck'>raspicheck.py</a>
 3. <a href='#raspiload'>raspiload.py</a>
 4. <a href='#showfonts'>showfonts.py</a>
 5. <a href='#vpy'>v.py</a>
 
+<br>
+<a href='#raspiinfo'>return to top</a>
+
 ---
 ---
-<h1 id='raspi' style='color:DodgerBlue'><b>raspi.py</b></h1>
+<h2 id='raspi' style='color:DodgerBlue'><b>raspi.py</b></h2>
 
 **Usage**
 
 Run this code with different power supplies and cables to find weak
-combinations. The printout and saved text shows if under-voltage is detected, 
-Arm frequency is capped, CPU is throttled or a Soft temperature limit is active.
-Testing during 10 minutes, whereas the last half is tested under heavy CPU load,
-shows failing cases.
+combinations. The printout and saved text shows if *under-voltage* is detected, 
+*Arm frequency* is capped, CPU is *throttled* or a "Soft temperature limit"
+ is active. Testing during 10 minutes, whereas the last half is tested under 
+ heavy CPU load, shows failing cases.
 
 The created file can be parsed for some statistical analysis the lines are fixed length.
 
 **how to use**
 
-- setup = Description of setup is added to file name and stored to textfile.
+- setup = Description of setup is added to file name and stored to textfile. 
+If empty the user is prompted to input setup information.
 - timeout = number of seconds to apply checking.
 
 bash command line
@@ -94,7 +99,7 @@ Core data - After   2.2 seconds | CPU: NOK | Voltage: low | arm freq:     ok | t
 Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | throttled: yes | Soft temp limit: inactive | Temp: 45.1°C | Volt:  1.2000V | Freq: 1.40GHz | Load:100%  | [100%, 100%, 100%, 100%]
 ```
 ---
-
+<a href='#raspiinfo'>return to top</a>
 <h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
 
 Simulate workload on all CPU core for Raspberry Pi. 
@@ -110,12 +115,11 @@ rcheck.main()
 Enter test setup:second test
 'second test' running for  0.2 minutes
 Start CPU load delayed by 5 seconds
-   0. Core data - After   0.0 seconds | CPU:  ok ...
+   0. Core data - After   0.0 seconds | CPU:  ok (...)
 ```
-
+<a href='#raspiinfo'>return to top</a>
 
 ---
-
 <h2 id='raspiload' style='color:DodgerBlue'><b>raspiload.py</b></h2>
 
 **Usage**
@@ -123,7 +127,6 @@ Start CPU load delayed by 5 seconds
 Simulate workload on all CPU cores for Raspberry Pi. 
 Code is independent of platform and was tested Rasbian and on Windows.
 
-**Features**
 - Increases CPU load to specific level
 - Uses up to all cores of multi-core processors
 - function to simulate load can be defined
@@ -148,7 +151,7 @@ sample output
 Start test for 5 seconds on 2 CPUs with 60% load
 Load CPUs terminated after 5.12 sec
 ```
-
+<a href='#raspiinfo'>return to top</a>
 
 ---
 <h2 id='showfonts' style='color:DodgerBlue'><b>showfonts.py</b></h2>
@@ -165,6 +168,7 @@ ImageFont.truetype('Vera')
 ```console
 $ python3 showfonts.py
 ```
+<a href='#raspiinfo'>return to top</a>
 
 ---
 <h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
@@ -199,5 +203,6 @@ Missing   : showfonts.py
 1.0.16    : v.py
 -----------------------------------------------------------------------------
 ```
+<a href='#raspiinfo'>return to top</a>
 
 ---
