@@ -1,4 +1,4 @@
-<small id='version'>v0.0.8</small>
+<small id='version'>v0.0.9</small>
 <!--
 @author: GFI
 FHAG
@@ -166,23 +166,15 @@ Identify your Raspberry and show all key information on screen. Save the same in
 
 **how to use**
 
-from bash
+from commandline: `$ python3 id.py`
 
-```shell
-$ python3 id.py
-```
-or on startup in crontab.
+or add to crontab to run at startup
 ```bash
 # m h  dom mon dow   command
 @reboot python3.7 id.py
 ```
 **sample output**
 
-command
-```shell
-$ python3 id.py
-```
-output
 ```
  $ python3 id.py
 ---------------------------- Welcome to 'raspi41GB' ----------------------------
@@ -220,15 +212,12 @@ keyword in text files and for a version number of format `0.0.1`.
 Shows all text files with version numbers.
 
 **how to use**
-```console
-$ python3 v.py
-```
 
+From commandline: `$ python3 v.py`
 
-Specific file types are excluded in the source code.
-```
-exclude_ftypes = ['.sample', '.log', '.cache']
-```
+Specific file types are excluded in the source code:
+ `exclude_ftypes = ['.sample', '.log', '.cache']`
+
 **Sample output**
 ```
 >---------------------------------- .gitignore ------------------------------
@@ -259,9 +248,9 @@ ImageFont.truetype('Vera')
 
 
 **how to use**
-```console
-$ python3 showfonts.py
-```
+
+From commandline: `$ python3 showfonts.py`
+
 <a href='#raspiinfo'>return to top</a>
 
 ---
