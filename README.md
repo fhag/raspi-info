@@ -1,4 +1,4 @@
-<small id='version'>v0.0.5</small>
+<small id='version'>v0.0.6</small>
 <h1 id='raspiinfo' style='color:DodgerBlue'><b>raspi-info.py</b></h1>
 Utilies to collect information about your Raspberry and 
 monitor CPU status under load.
@@ -98,8 +98,9 @@ Core data - After   0.0 seconds | CPU:  ok | Voltage:  ok | arm freq:     ok | t
 Core data - After   2.2 seconds | CPU: NOK | Voltage: low | arm freq:     ok | throttled: yes | Soft temp limit: inactive | Temp: 43.5°C | Volt:  1.2000V | Freq: 1.40GHz | Load: 40%  | [ 43%,  41%,  40%,  39%]
 Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | throttled: yes | Soft temp limit: inactive | Temp: 45.1°C | Volt:  1.2000V | Freq: 1.40GHz | Load:100%  | [100%, 100%, 100%, 100%]
 ```
----
 <a href='#raspiinfo'>return to top</a>
+
+---
 <h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
 
 Simulate workload on all CPU core for Raspberry Pi. 
