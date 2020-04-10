@@ -3,14 +3,13 @@
 Print all py source codes and versions
 
 @author: GFI
-
 requires Python 3.6 or later
 """
 import os
 import re
 from collections import defaultdict
 
-__version__ = '1.0.17'
+__version__ = '1.0.18'
 
 
 re_vnr = re.compile('(\d{1,3}\.\d{1,3}\.\d{1,3})')
@@ -36,7 +35,7 @@ def get_ftype(fname):
         return re.search(re_ftype, fname).group()
     except AttributeError:
         return ''
-    return
+    return ''
 
 
 def check_file(ffname) -> str:
@@ -60,7 +59,7 @@ def check_file(ffname) -> str:
 
 if __name__ == '__main__':
     cwd = os.getcwd()
-    res = defaultdict(list)
+    response = defaultdict(list)
     files = get_allfiles(cwd)
     file = files[1]
     len_cwd = len(cwd) + 1
@@ -69,10 +68,10 @@ if __name__ == '__main__':
         if vnr is None:
             vnr = 'Missing'
         if ftype and vnr and ftype not in exclude_ftypes:
-            res[ftype].append((file[len_cwd:], vnr))
-    n = 80
-    for key in res.keys():
-        print(f' {key} '.center(n, '-'))
-        for fn, vnr in res[key]:
+            response[ftype].append((file[len_cwd:], vnr))
+    nr = 80
+    for key in response.keys():
+        print(f' {key} '.center(nr, '-'))
+        for fn, vnr in response[key]:
             print(f' {vnr:9s} : {fn}')
-    print(f'-'.center(n, '-'))
+    print(f'-'.center(nr, '-'))
