@@ -1,4 +1,4 @@
-<small id='version'>v0.0.7</small>
+<small id='version'>v0.0.8</small>
 <!--
 @author: GFI
 FHAG
@@ -28,8 +28,9 @@ required by your Raspi.
 1. <a href='#raspi'>raspi.py</a>
 2. <a href='#raspicheck'>raspicheck.py</a>
 3. <a href='#raspiload'>raspiload.py</a>
-4. <a href='#showfonts'>showfonts.py</a>
+4. <a href='#id'>id.py</a>
 5. <a href='#vpy'>v.py</a>
+6. <a href='#showfonts'>showfonts.py</a>
 
 <br>
 <a href='#raspiinfo'>return to top</a>
@@ -125,9 +126,8 @@ Start CPU load delayed by 5 seconds
 <a href='#raspiinfo'>return to top</a>
 
 ---
-<h2 id='raspiload' style='color:DodgerBlue'><b>raspiload.py</b></h2>
 
-**Usage**
+<h2 id='raspiload' style='color:DodgerBlue'><b>raspiload.py</b></h2>
 
 Simulate workload on all CPU cores for Raspberry Pi.
 Code is independent of platform and was tested Rasbian and on Windows.
@@ -159,20 +159,57 @@ Load CPUs terminated after 5.12 sec
 <a href='#raspiinfo'>return to top</a>
 
 ---
-<h2 id='showfonts' style='color:DodgerBlue'><b>showfonts.py</b></h2>
 
-Find all TrueType fonts ("TTF") installed on your Raspberry.
-TTF can be used for example in python :
-```python
-from PIL import ImageFont<br>
-ImageFont.truetype('Vera')
-```
+<h2 id='id' style='color:DodgerBlue'><b>id.py</b></h2>
 
+Identify your Raspberry and show all key information on screen. Save the same information in file `id.txt` .
 
 **how to use**
-```console
-$ python3 showfonts.py
+
+from bash
+
+```shell
+$ python3 id.py
 ```
+or on startup in crontab.
+```bash
+# m h  dom mon dow   command
+@reboot python3.7 id.py
+```
+**sample output**
+
+command
+```shell
+$ python3 id.py
+```
+output
+```
+ $ python3 id.py
+---------------------------- Welcome to 'raspi41GB' ----------------------------
+Computer Model     : Raspberry Pi 4 Model B 1gigabytes
+Total memory       : 1GB
+Disk Space         : total=12GB used= 68% free=4GB
+Model              : Raspberry Pi 4 Model B Rev 1.1
+Processorname      : ARMv7 Processor rev 3 (v7l) 7.3
+Hardware - Revision: BCM2835 - a03111
+# of CPUs          : - [4]
+CPU frequency      : 1,500Mhz
+BogoMIPs/CPU       : 270.00
+CPU serial         : 100000003408c4cb
+System             : Linux#1294 SMP Thu Jan 30 13:21:14 GMT 2020
+Machine            : armv7l
+Processor          : 
+Pretty Name        : Raspbian GNU/Linux 10 (buster)"
+Home URL           : http://www.raspbian.org/"
+Support URL        : http://www.raspbian.org/RaspbianForums"
+Platform           : linux 10.3
+Python version     : 3.7.3 (default, Dec 20 2019, 18:57:59)  [GCC 8.3.0]
+Active Connections
+- lo               : 127.0.0.1
+- eth0             : 192.168.0.235
+------------------- id.py 0.1.4 -- Fri Apr 10 17:24:52 2020 --------------------
+```
+
 <a href='#raspiinfo'>return to top</a>
 
 ---
@@ -211,3 +248,21 @@ Missing   : showfonts.py
 <a href='#raspiinfo'>return to top</a>
 
 ---
+<h2 id='showfonts' style='color:DodgerBlue'><b>showfonts.py</b></h2>
+
+Find all TrueType fonts ("TTF") installed on your Raspberry.
+TTF can be used for example in python :
+```python
+from PIL import ImageFont<br>
+ImageFont.truetype('Vera')
+```
+
+
+**how to use**
+```console
+$ python3 showfonts.py
+```
+<a href='#raspiinfo'>return to top</a>
+
+---
+
