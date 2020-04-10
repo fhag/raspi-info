@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 '''
 Start Main Routine for Raspberry Check
-@author: GFI
 
+@author: GFI
 requires Python 3.6 or later
 '''
-from raspicheck import RaspiCheck
-import platform
 import argparse
+import platform
+from raspicheck import RaspiCheck
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 
-rel1, rel2, rel3 = platform.python_version_tuple()
-if int(rel1) < 3 or int(rel2) < 7:
-    raise('requires at least python 3.7')
+pversion = platform.python_version().replace('.', '')
+if int(pversion) < 7:
+    raise ValueError('requires at least python 3.7')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Monitor CPU parameters with changing CPU load')
-    parser.add_argument('setup', nargs='*', default= [''],
+    parser.add_argument('setup', nargs='*', default=[''],
                         help='a string describing test setup')
     parser.add_argument('-t', '--timeout', type=int,
                         default=600, metavar='',
@@ -27,5 +27,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     setup = ' '.join(args.setup)
     timeout = args.timeout
-    r = RaspiCheck(setup, timeout)
-    r.main()
+    rcheck = RaspiCheck(setup, timeout)
+    rcheck.main()
