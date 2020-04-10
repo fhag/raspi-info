@@ -1,4 +1,4 @@
-<!-- version 0.0.3 -->
+<small id='version'>v0.0.4</small>
 # raspi-info
 Utilies to collect information about your Raspberry and 
 monitor CPU status under load.
@@ -57,6 +57,11 @@ optional arguments:
   -h, --help       show this help message and exit
   -t , --timeout   runtime of tests - timeout in seconds
 ```
+If `setup` is an empty string (''), an input is requested after start.
+
+```python
+Enter test setup:
+```
 
 **Sample Output**
 
@@ -91,20 +96,22 @@ Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | t
 ---
 
 <h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
-**Usage**
 
 Simulate workload on all CPU core for Raspberry Pi. 
 This code is independent of platform and was also tested on windows.
 
-**Features**
+**how to use**
 
-
-
-
-
-**Sample Output**
-
-<br>
+Used in <a href="#raspi">raspi.py</a> and produces same output.
+Can also be invoked in python3:
+```python
+rcheck = RaspiCheck(setup='', timeout=10)
+rcheck.main()
+Enter test setup:second test
+'second test' running for  0.2 minutes
+Start CPU load delayed by 5 seconds
+   0. Core data - After   0.0 seconds | CPU:  ok ...
+```
 
 
 ---
@@ -113,8 +120,8 @@ This code is independent of platform and was also tested on windows.
 
 **Usage**
 
-Simulate workload on all CPU core for Raspberry Pi. 
-Code is independent of platform and was also tested on windows.
+Simulate workload on all CPU cores for Raspberry Pi. 
+Code is independent of platform and was tested Rasbian and on Windows.
 
 **Features**
 - Increases CPU load to specific level
@@ -145,7 +152,7 @@ Load CPUs terminated after 5.12 sec
 
 ---
 <h2 id='showfonts' style='color:DodgerBlue'><b>showfonts.py</b></h2>
-**Usage**
+
 Find all TrueType fonts ("TTF") installed on your Raspberry.
 TTF can be used for example in python :
 ```python
@@ -162,9 +169,9 @@ $ python3 showfonts.py
 ---
 <h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
 
-**Usage**
-- Helps keeping track of version on different computer
-- Shows all text files including with version numbers
+Helps keeping track of version on different computer. Looks for `version` 
+keyword in text files and for a version number of format `0.0.1`.
+Shows all text files with version numbers.
 
 **how to use**
 ```console
@@ -172,7 +179,7 @@ $ python3 v.py
 ```
 
 
-Specific file types can be excluded in the source code
+Specific file types are excluded in the source code.
 ```
 exclude_ftypes = ['.sample', '.log', '.cache']
 ```
@@ -192,4 +199,5 @@ Missing   : showfonts.py
 1.0.16    : v.py
 -----------------------------------------------------------------------------
 ```
+
 ---
