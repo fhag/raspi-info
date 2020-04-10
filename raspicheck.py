@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 '''
-@author: GFI
+Check Raspberry CPU over timeout (in seconds)
 
+@author: GFI
 requires Python 3.6 or later
 '''
 import subprocess
 import string
-from psutil import time, cpu_freq, cpu_percent
 import unicodedata
 from threading import Thread
+from psutil import time, cpu_freq, cpu_percent
 from raspiload import load_cpus
 
-__version__ = '0.0.15'
+__version__ = '0.0.16'
 
 
 class RaspiCheck():
@@ -38,14 +39,14 @@ class RaspiCheck():
         '''Return valid filename with date'''
         if path is None:
             path = self.path
-        validChars = "-_. %s%s" % (string.ascii_letters, string.digits)
-        cleaned_txt = unicodedata.normalize('NFKD', txt).encode('ASCII', 'ignore')
+        valid_chars = "-_. %s%s" % (string.ascii_letters, string.digits)
+        cleaned_txt = unicodedata.normalize('NFKD', txt).encode('ASCII',
+                                                                'ignore')
         cleaned_txt = cleaned_txt.decode('utf8').replace(' ', '_')
-        cleaned_txt = ''.join(c for c in cleaned_txt if c in validChars)
+        cleaned_txt = ''.join(c for c in cleaned_txt if c in valid_chars)
         fname = f'rsp_{time.time():}'
         fname = f"{path}cr{time.strftime('%Y-%m-%d-%H%M%S')}_{cleaned_txt}.txt"
         return fname
-
 
     def raspi_check(self, setup='', timeout=3, sleeptime=1, log_all=False):
         '''Check raspi behaviour under load'''
@@ -60,9 +61,11 @@ class RaspiCheck():
                  lambda x: ('capped' if int(x, base=16) & 0b10 else 'ok')),
                 ('vcgencmd get_throttled', 'throttled: {:>3s}', 'throttle3',
                  lambda x: ('yes' if int(x, base=16) & 0b1 else 'no')),
-                ('vcgencmd get_throttled', 'Soft temp limit: {:>8s}', 'throttle4',
-                 lambda x: ('active' if int(x, base=16) & 0b1000 else 'inactive')),
-                 ('vcgencmd measure_temp', 'Temp: {:>7s}', 'temp',
+                ('vcgencmd get_throttled', 'Soft temp limit: {:>8s}',
+                 'throttle4',
+                 lambda x: ('active' if int(x, base=16) & 0b1000 else
+                            'inactive')),
+                ('vcgencmd measure_temp', 'Temp: {:>7s}', 'temp',
                  lambda x: x.replace("'", "°")),
                 ('vcgencmd measure_volts core', 'Volt: {:>9s}', 'volt', str),
                 ('vcgencmd measure_clock arm', 'Freq: {:3,.2f}GHz', 'freq',
@@ -97,7 +100,8 @@ class RaspiCheck():
                 res = fstr.format(func(res))
                 res_dict[key] = res
             result = ' | '.join(res_dict.values())
-            if (res_dict['throttle0'][-2:] != 'ok') or (counter % 10 == 0) or log_all:
+            condition1 = res_dict['throttle0'][-2:] != 'ok'
+            if condition1 or (counter % 10 == 0) or log_all:
                 print(f'{counter:4.0f}. {result}')
                 with open(self.fname, 'a') as file:
                     file.write(result + '\n')
@@ -106,6 +110,7 @@ class RaspiCheck():
         print(f'Check results in file: {self.fname}')
 
     def main(self):
+        '''Start CPU check'''
         if self.setup == '':
             self.setup = input('Enter test setup:')
         check_context = self.check_context.copy()
@@ -120,13 +125,12 @@ class RaspiCheck():
         print(runtxt)
         self.fname = self.valid_filename(self.setup)
         threads = [Thread(target=self.load_cpus, kwargs=load_context),
-                    Thread(target=self.raspi_check,
-                    kwargs=check_context)]
+                   Thread(target=self.raspi_check,
+                          kwargs=check_context)]
 
-        [t.start() for t in threads]
-        [t.join() for t in threads]
+        _ = [t.start() for t in threads]
+        _ = [t.join() for t in threads]
         print(f'Finished after {time.time() - start_time:.0f} seconds')
-
 
 
 if __name__ == '__main__':
