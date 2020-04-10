@@ -12,17 +12,17 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from threading import Thread
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 
 
-def load_single_cpu(timeout=5, load_pct=1.00, load_func=None, fname=''):
+def load_single_cpu(timeout=5, loadpct=1.00, load_func=None, fname=''):
     '''load cpu in intervalls'''
     def _load_func():
         '''Function to load cpu'''
         _ = math.log(random.random())
 
     if fname != '':
-        ftext = f'CPU {load_pct:.0%} load ' \
+        ftext = f'CPU {loadpct:.0%} load ' \
                 f'started for {timeout:.0f} seconds'
         with open(fname, 'a') as file:
             file.writeln(ftext)
