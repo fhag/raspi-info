@@ -1,3 +1,4 @@
+<!-- version 0.0.3 -->
 # raspi-info
 Utilies to collect information about your Raspberry and 
 monitor CPU status under load.
@@ -19,11 +20,11 @@ required by your Raspi.
 
 
 # **Table of Contents**
-<a href='#raspi'>1. raspi.py</a>
-
-### raspi.py
-### raspi
-
+1. <a href='#raspi'>raspi.py</a>
+2. <a href='#raspicheck'>raspicheck.py</a>
+3. <a href='#raspiload'>raspiload.py</a>
+4. <a href='#showfonts'>showfonts.py</a>
+5. <a href='#vpy'>v.py</a>
 
 ---
 ---
@@ -39,13 +40,12 @@ shows failing cases.
 
 The created file can be parsed for some statistical analysis the lines are fixed length.
 
-**Features**
+**how to use**
 
-setup = Description of setup is added to file name and stored to textfile.
+- setup = Description of setup is added to file name and stored to textfile.
+- timeout = number of seconds to apply checking.
 
-timeout = number of seconds to apply checking.
-
-command line
+bash command line
 ```console
 $ python3 raspi.py -h
 usage: raspi.py [-h] [-t] [setup [setup ...]]
@@ -57,11 +57,10 @@ optional arguments:
   -h, --help       show this help message and exit
   -t , --timeout   runtime of tests - timeout in seconds
 ```
-in python
-
-
 
 **Sample Output**
+
+command line start
 
 ```console
 $ python3 raspi.py sample-raspi -t 5
@@ -76,7 +75,7 @@ Load CPUs terminated after 2.19 sec
 Check results in file: data/cr2020-04-10-094643_sample-raspi.txt
 Finished after 5 seconds
 ```
-Created the following text file:
+... created the following text file:
 ```console
 $ ls -l data/*sample*.txt
 -rw-r--r-- 1 pi pi 899 Apr 10 09:46 data/cr2020-04-10-094643_sample-raspi.txt
@@ -89,17 +88,9 @@ Core data - After   0.0 seconds | CPU:  ok | Voltage:  ok | arm freq:     ok | t
 Core data - After   2.2 seconds | CPU: NOK | Voltage: low | arm freq:     ok | throttled: yes | Soft temp limit: inactive | Temp: 43.5°C | Volt:  1.2000V | Freq: 1.40GHz | Load: 40%  | [ 43%,  41%,  40%,  39%]
 Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | throttled: yes | Soft temp limit: inactive | Temp: 45.1°C | Volt:  1.2000V | Freq: 1.40GHz | Load:100%  | [100%, 100%, 100%, 100%]
 ```
-<code>test
-neuer
-
-
-erar
-</code>
-
 ---
 
-## **<font color='red' >raspicheck.py</font>**
-
+<h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
 **Usage**
 
 Simulate workload on all CPU core for Raspberry Pi. 
@@ -118,8 +109,7 @@ This code is independent of platform and was also tested on windows.
 
 ---
 
-## **<font color='lightblue'>raspiload.py</font>**
-
+<h2 id='raspiload' style='color:DodgerBlue'><b>raspiload.py</b></h2>
 
 **Usage**
 
@@ -133,7 +123,7 @@ Code is independent of platform and was also tested on windows.
 
 **how to use**
 
-in python:
+in python
 
 ```python
     from raspiload import load_cpus
@@ -146,15 +136,15 @@ in python:
     load_cpus(**context)
 ```
 
-**Sample**
-
-
-<br>
+sample output
+```console
+Start test for 5 seconds on 2 CPUs with 60% load
+Load CPUs terminated after 5.12 sec
+```
 
 
 ---
-## **showfonts.py**
-
+<h2 id='showfonts' style='color:DodgerBlue'><b>showfonts.py</b></h2>
 **Usage**
 Find all TrueType fonts ("TTF") installed on your Raspberry.
 TTF can be used for example in python :
@@ -169,10 +159,8 @@ ImageFont.truetype('Vera')
 $ python3 showfonts.py
 ```
 
-<br>
-
 ---
-## **v.py**
+<h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
 
 **Usage**
 - Helps keeping track of version on different computer
