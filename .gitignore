@@ -1,10 +1,11 @@
 # version 0.0.1
 
-# retain the following files
-!data/sample_log.txt
-!data/sampe_id.txt
-
 # exclude the following files
 __pycache__
 **/__pycache__/**
 **.txt
+
+# retain the following files
+!data/sample_log.txt
+!data/sampe_id.txt
+!data/sample_v.txt

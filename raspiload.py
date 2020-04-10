@@ -12,10 +12,10 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from threading import Thread
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 
 
-def load_single_cpu(timeout=5, loadpct=1.00, load_func=None, fname=''):
+def load_single_cpu(timeout=5, load_pct=1.00, load_func=None, fname=''):
     '''load cpu in intervalls'''
     def _load_func():
         '''Function to load cpu'''
