@@ -3,7 +3,6 @@
 Created on Tue Apr  7 13:31:33 2020
 
 @author: GFI
-
 requires Python 3.6 or later
 """
 import math
@@ -13,7 +12,7 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from threading import Thread
 
-__version__ = '0.0.8'
+__version__ = '0.0.9'
 
 
 def load_single_cpu(timeout=5, loadpct=1.00, load_func=None, fname=''):
@@ -74,13 +73,13 @@ def load_cpus(timeout=3, loadpct=0.5, max_cpus=None, delay=0):
 
 
 if __name__ == '__main__':
-    timeout = 5
-    loadpct = 0.6
-    max_cpus = 2
-    delay = 0
-    context = dict(timeout=timeout, loadpct=loadpct,
-                   max_cpus=max_cpus, delay=delay)
-    threads = [Thread(target=load_cpus, kwargs=context) for i in range(2)]
-    [t.start() for t in threads]
-    [t.join() for t in threads]
+    TIMEOUT = 5
+    LOADPCT = 0.6
+    MAX_CPUS = 2
+    DELAY = 0
+    CONTEXT = dict(timeout=TIMEOUT, loadpct=LOADPCT,
+                   max_cpus=MAX_CPUS, delay=DELAY)
+    THREADS = [Thread(target=load_cpus, kwargs=CONTEXT) for i in range(2)]
+    _ = [t.start() for t in THREADS]
+    _ = [t.join() for t in THREADS]
     print('finish')
