@@ -13,14 +13,14 @@ from platform import uname
 from os import popen
 import psutil
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 
 # Raspi 4 shows BCM2835 instead of BCM2711
 RASPIS = [
-    {'Raspberry Pi 4 Model B 1gigabytes': ['BCM2835', '1500', '1024']},
-    {'Raspberry Pi 4 Model B 2gigabytes': ['BCM2835', '1500', '2048']},
-    {'Raspberry Pi 4 Model B 4gigabytes': ['BCM2835', '1500', '4096']},
+    {'Raspberry Pi 4 Model B 1GB': ['BCM2835', '1500', '1024']},
+    {'Raspberry Pi 4 Model B 2GB': ['BCM2835', '1500', '2048']},
+    {'Raspberry Pi 4 Model B 4GB': ['BCM2835', '1500', '4096']},
     {'Raspberry Pi 3 Model B+': ['1400', '1024']},
     {'Raspberry Pi 3 Model A+': ['1400', '512']},
     {'Raspberry Pi 3 Model B': ['1200', '1024']},
@@ -76,7 +76,7 @@ def pi_camera():
 
 
 def pretty_size(nr_of_bytes) -> str:
-    '''return string in KB, megabytes or gigabytes'''
+    '''return string in KB, MB or GB'''
     extensions = ['GB', 'MB', 'KB', 'B']
     nrbytes = int(nr_of_bytes) / 1024 ** 3
     for extension in extensions:
@@ -143,7 +143,8 @@ def _get_mem():
         gpu_mem = int(line2[4:-2]) * megabytes
         virt_mem = psutil.virtual_memory().total
         if virt_mem > gigabytes:
-            tot_mem = int(round((virt_mem + gpu_mem) / gigabytes, 0) * gigabytes)
+            tot_mem = int(round((virt_mem + gpu_mem) / gigabytes,
+                                0) * gigabytes)
         else:
             tot_mem = arm_mem + gpu_mem
     except ValueError:
