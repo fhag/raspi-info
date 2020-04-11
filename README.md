@@ -1,4 +1,4 @@
-<small id='version'>v0.0.11</small>
+<small id='version'>v0.0.12</small>
 <!--
 @author: GFI
 FHAG
@@ -11,7 +11,8 @@ as my Raspi lost sometimes the WiFi Connection or crashed without reason.
 It turned out, that due to a bad power supply and cable the processor was
 throttled.
 
-The actual state can be read out with `vcgencmd get_throttled`. For testing
+The actual state can be read out with 
+<a href="https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md">vcgencmd get_throttled</a>. For testing
  different combinations of power supply and cables this code was used.
 
 Learnings are:
@@ -35,6 +36,8 @@ required by your Raspi.
 <a href='#raspiinfo'>return to top</a>
 
 ---
+
+
 ---
 <h2 id='raspi' style='color:DodgerBlue'><b>raspi.py</b></h2>
 
@@ -47,6 +50,11 @@ combinations. The printout and saved text shows if *under-voltage* is detected,
  heavy CPU load, shows failing cases.
 
 The created file can be parsed for some statistical analysis the lines are fixed length.
+
+**Installation**
+
+Download `raspi.py`, `raspicheck.py` and `raspiload.py` into the same directory
+where you need it. Create also a folder `data/` for file output.
 
 **How to use**
 
@@ -105,10 +113,18 @@ Core data - After   3.6 seconds | CPU: NOK | Voltage: low | arm freq:     ok | t
 <a href='#raspiinfo'>return to top</a>
 
 ---
+
+
+
 <h2 id='raspicheck' style='color:DodgerBlue'><b>raspicheck.py</b></h2>
 
 Simulate workload on all CPU core for Raspberry Pi.
 This code is independent of platform and was also tested on windows.
+
+**Installation**
+
+Download `raspicheck.py` and `raspiload.py` into the same directory
+where you need it. Create also a folder `data/` for file output.
 
 **How to use**
 
@@ -129,6 +145,8 @@ for sample output see `raspi.py`
 
 ---
 
+
+
 <h2 id='raspiload' style='color:DodgerBlue'><b>raspiload.py</b></h2>
 
 Simulate workload on all CPU cores for Raspberry Pi.
@@ -137,6 +155,11 @@ Code is independent of platform and was tested Rasbian and on Windows.
 - Increases CPU load to specific level
 - Uses up to all cores of multi-core processors
 - function to simulate load can be defined
+
+**Installation**
+
+Download `raspiload.py` in the directory where you need it and create a folder `data/`
+for file output.
 
 **How to use**
 
@@ -163,13 +186,19 @@ Load CPUs terminated after 5.12 sec
 
 <a href='#raspiinfo'>return to top</a>
 
-
 ---
+
+
+
 <h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
 
 Helps keeping track of version on different computer. Looks for `version`
 keyword in text files and for a version number of format `0.0.1`.
 Shows all text files with version numbers.
+
+**Installation**
+
+Download `v.py` into the directory where you need it.
 
 **How to use**
 
@@ -194,6 +223,9 @@ Missing   : showfonts.py
 1.0.16    : v.py
 -----------------------------------------------------------------------------
 ```
+
+
+
 <a href='#raspiinfo'>return to top</a>
 
 ---
@@ -206,6 +238,9 @@ from PIL import ImageFont<br>
 ImageFont.truetype('Vera')
 ```
 
+**Installation**
+
+Download `showfonts.py` in the directory where you need it.
 
 **How to use**
 
