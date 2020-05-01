@@ -29,8 +29,10 @@ required by your Raspi.
 1. <a href='#raspi'>raspi.py</a>
 2. <a href='#raspicheck'>raspicheck.py</a>
 3. <a href='#raspiload'>raspiload.py</a>
-4. <a href='#vpy'>v.py</a>
-5. <a href='#showfonts'>showfonts.py</a>
+4. <a href='#raspianalyse'>raspianalyse.py</a>
+5. <a href='#vpy'>v.py</a>
+6. <a href='#showfonts'>showfonts.py</a>
+
 
 <br>
 <a href='#raspiinfo'>return to top</a>
@@ -183,6 +185,38 @@ Start test for 5 seconds on 2 CPUs with 60% load
 Load CPUs terminated after 5.12 sec
 
 ```
+
+<a href='#raspiinfo'>return to top</a>
+
+---
+
+
+
+<h2 id='raspianalyse' style='color:DodgerBlue'><b>raspianalyse.py</b></h2>
+
+Takes *.txt files from <a href='#raspicheck'>raspicheck.py</a>
+and creates a chart in a pdf.
+The page shows charts of all key indicators collected in 
+<a href='#raspicheck'>raspicheck.py</a> over time.
+The file can also be save as 'jpg' or 'png' by changing the file extension.
+
+**Installation**
+
+Download `raspianalyse.py` in the directory where you need it 
+and create a folder `data/` for file output. <br>
+Requires module `matplotlib`.
+
+**How to use**
+
+Create a PDFs from all txt files in `data/` folder.on.
+```console
+python3 raspianalyse.py  
+```
+
+**Sample output**
+
+![Sample chart of a Raspberry Pi 4 with 1GB](data/sample.png)
+
 
 <a href='#raspiinfo'>return to top</a>
 

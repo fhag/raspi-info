@@ -11,3 +11,4 @@ first_tests/**
 !data/sample_log.txt
 !data/sampe_id.txt
 !data/sample_v.txt
+!data/sample.txt
