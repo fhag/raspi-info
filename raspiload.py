@@ -12,36 +12,81 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from threading import Thread
 
-__version__ = '0.0.9'
+__version__ = '0.0.13'
 
 
-def load_single_cpu(timeout=5, loadpct=1.00, load_func=None, fname=''):
-    '''load cpu in intervalls'''
+# def time_counter(timeout=5):
+#     '''return time since start'''
+#     start_time = time.time()
+#     while time.time() - start_time < timeout:
+#         yield max(time.time() - start_time, 0.01)
+
+def time_counter():
+    '''return time since start'''
+    resp = 'reset'
+    while resp != 'stop':
+        if resp == 'reset':
+            start_time = time.time()
+        el_time = time.time() - start_time
+        resp = yield round(el_time, 3)
+
+
+def load_single_cpu(cpu_nr=0, timeout=6,
+                    load_plan=[(3, 0.5), (4, 1.0)],
+                    load_func=None):
+    '''
+    load CPI in intervalls
+    - timeout = time to run load
+    - load_plan changing load during runtime
+      [(time_slice, loadpct)),]
+    - load_func = function run for processor load
+    '''
     def _load_func():
         '''Function to load cpu'''
         _ = math.log(random.random())
-
-    if fname != '':
-        ftext = f'CPU {loadpct:.0%} load ' \
-                f'started for {timeout:.0f} seconds'
-        with open(fname, 'a') as file:
-            file.writeln(ftext)
+    if timeout == 0:
+        return
+    cpname = f'CPU[{cpu_nr:2.0f}] '
+    _times, loads = zip(*load_plan)
+    times_sum = sum(_times)
+    times = [round(timeout * t / times_sum, 1) for t in _times]
+    times = [sum(times[:i]) for i in range(1, len(times) + 1)]
+    _load_plan = [(t, l) for t, l in zip(times, loads)]
     if load_func is None:
         load_func = _load_func
-    load_time = max(0, min(1, loadpct))
-    noload_time = 1 - load_time
     start_functime = time.time()
-    while time.time() - timeout < start_functime:
-        start_load = time.time()
-        while time.time() < start_load + load_time:
+    tcounter = time_counter()
+    next(tcounter)
+    runtime = -0.1
+    ftext = f'{cpname} load started after {next(tcounter):.0f}' \
+            f' seconds for {timeout:.0f} seconds'
+    print(ftext)
+    load_counter = time_counter()
+    next(load_counter)
+    while next(tcounter) < timeout:
+        # print(f'1 {next(tcounter)} seconds')
+        if next(tcounter) > runtime and _load_plan:
+            runtime, loadpct = _load_plan.pop(0)
+            ftext = f'{cpname} {loadpct:4.0%} load started' \
+                    f' after {next(tcounter):4.0f} seconds'
+            print(ftext)
+            load_time = max(0, min(1, loadpct))
+        load_counter.send('reset')
+        # print(f'2 {next(tcounter)} seconds')
+        while next(load_counter) < load_time:
             _ = load_func()
-        start_noload = time.time()
-        while time.time() < start_noload + noload_time:
-            sleep_time = abs(min(start_noload + noload_time - time.time(),
-                                 noload_time))
+        # print(f'3 {next(tcounter)} seconds')
+        while next(load_counter) < 1:
+            sleep_time = abs(min(1 - next(load_counter), 1 - load_time))
             time.sleep(sleep_time)
+            # print('sleep')
+        # print(f'4 {next(tcounter)} seconds')
+    try:
+        tcounter.send('stop')
+    except StopIteration:
+        pass
     runtime = time.time() - start_functime
-    ftext = f'CPU load terminated after {runtime:3.1f} seconds'
+    ftext = f'{cpname} load terminated after {runtime:3.1f} seconds'
     return ftext
 
 
@@ -51,21 +96,22 @@ def sleep_until(seconds=1):
     print(time.time())
 
 
-def load_cpus(timeout=3, loadpct=0.5, max_cpus=None, delay=0):
+def load_cpus(timeout=3, load_plan=[(1, 0.5)], max_cpus=None, delay=0):
     '''load cpu with defined percentage'''
     if delay > 0:
         print(f'Start CPU load delayed by {delay:.0f} seconds')
         time.sleep(delay)
+        timeout = max(0, timeout - delay)
     if max_cpus is None or max_cpus > cpu_count():
         processes = cpu_count()
     else:
         processes = max_cpus
-    func = partial(load_single_cpu, loadpct=loadpct)
+    func = partial(load_single_cpu, load_plan=load_plan, timeout=timeout)
     ftext = (f'Start test for {timeout:.0f} seconds '
              f'on {processes:.0f} CPUs '
-             f'with {loadpct:.0%} load')
+             f'with initially {load_plan[0][1]:.0%} load')
     print(ftext)
-    params = [timeout, ] * processes
+    params = [i + 1 for i in range(processes)]
     stime = time.time()
     with Pool(processes=processes) as pool:
         _ = pool.map(func, params)
@@ -73,13 +119,15 @@ def load_cpus(timeout=3, loadpct=0.5, max_cpus=None, delay=0):
 
 
 if __name__ == '__main__':
-    TIMEOUT = 5
-    LOADPCT = 0.6
-    MAX_CPUS = 2
-    DELAY = 0
-    CONTEXT = dict(timeout=TIMEOUT, loadpct=LOADPCT,
-                   max_cpus=MAX_CPUS, delay=DELAY)
-    THREADS = [Thread(target=load_cpus, kwargs=CONTEXT) for i in range(2)]
+    TIMEOUT = 60
+    LOAD_PLAN = [(1, 0.0), (1, 0.3), (1, 0.6), (1, 1.0)]
+    MAX_CPUS = None
+    DELAY = 1
+    CONTEXT = dict(timeout=TIMEOUT,
+                   load_plan=LOAD_PLAN,
+                   max_cpus=MAX_CPUS,
+                   delay=DELAY)
+    THREADS = [Thread(target=load_cpus, kwargs=CONTEXT) for i in range(1)]
     _ = [t.start() for t in THREADS]
     _ = [t.join() for t in THREADS]
     print('finish')

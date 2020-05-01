@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 """
 Print all py source codes and versions
-
-@author: GFI
-requires Python 3.6 or later
 """
+
 import os
 import re
 from collections import defaultdict
 
-__version__ = '1.0.18'
-
+__version__ = '1.0.21'
 
 re_vnr = re.compile('(\d{1,3}\.\d{1,3}\.\d{1,3})')
 re_version = re.compile('(?i)version')
 re_ftype = re.compile('(\.\w+)$')
 
-exclude_ftypes = ['.sample', '.log', '.cache']
+include_ftypes = ['.py', '.json', '.html', '.sh']
 
 
 def get_allfiles(path, extension=''):
@@ -35,7 +32,7 @@ def get_ftype(fname):
         return re.search(re_ftype, fname).group()
     except AttributeError:
         return ''
-    return ''
+    return
 
 
 def check_file(ffname) -> str:
@@ -59,19 +56,22 @@ def check_file(ffname) -> str:
 
 if __name__ == '__main__':
     cwd = os.getcwd()
-    response = defaultdict(list)
+    res = defaultdict(list)
     files = get_allfiles(cwd)
-    file = files[1]
     len_cwd = len(cwd) + 1
+    files = [file for file in files if get_ftype(file) in include_ftypes]
     for file in files:
         vnr, ftype = check_file(file)
         if vnr is None:
             vnr = 'Missing'
-        if ftype and vnr and ftype not in exclude_ftypes:
-            response[ftype].append((file[len_cwd:], vnr))
-    nr = 80
-    for key in response.keys():
-        print(f' {key} '.center(nr, '-'))
-        for fn, vnr in response[key]:
+        if ftype and vnr:
+            res[ftype].append((file[len_cwd:], vnr))
+    n = 80
+    os.system('cls' if os.name=='nt' else 'clear')
+    print()
+    print(f'v.py {__version__} '.center(n, '-'))
+    for key in res.keys():
+        print(f' {key} '.center(n, '-'))
+        for fn, vnr in res[key]:
             print(f' {vnr:9s} : {fn}')
-    print(f'-'.center(nr, '-'))
+    print(f'-'.center(n, '-'))
