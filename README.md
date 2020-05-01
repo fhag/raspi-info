@@ -1,4 +1,4 @@
-<small id='version'>v0.0.12</small>
+<small id='version'>v0.0.13</small>
 <!--
 @author: GFI
 FHAG
@@ -33,6 +33,11 @@ required by your Raspi.
 5. <a href='#vpy'>v.py</a>
 6. <a href='#showfonts'>showfonts.py</a>
 
+
+<h3 style='color:DodgerBlue'><b>Sample analysis</b></h3>
+
+
+<img src="data/sample.png" alt="Sample chart" width="300"/>
 
 <br>
 <a href='#raspiinfo'>return to top</a>
