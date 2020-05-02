@@ -1,4 +1,4 @@
-<small id='version'>v0.0.13</small>
+<small id='version'>v0.0.14</small>
 <!--
 @author: GFI
 FHAG
@@ -37,7 +37,7 @@ required by your Raspi.
 <h3 style='color:DodgerBlue'><b>Sample analysis</b></h3>
 
 
-<img src="data/sample.png" alt="Sample chart" width="300"/>
+<img src="charts/sample.png" alt="Sample chart" width="300"/>
 
 <br>
 <a href='#raspiinfo'>return to top</a>
@@ -207,20 +207,36 @@ The file can also be save as 'jpg' or 'png' by changing the file extension.
 
 **Installation**
 
-Download `raspianalyse.py` in the directory where you need it 
+Download `raspianalyse.py` into the directory where you need it 
 and create a folder `data/` for file output. <br>
 Requires module `matplotlib`.
 
 **How to use**
 
-Create a PDFs from all txt files in `data/` folder.on.
+Create PDFs from all txt files in `charts/`. Folder `charts/` is created
+if necessary. 
+Charts in pdf-format are automatically created 
+when `raspi.py` is run and matplotlib is installed.
 ```console
 python3 raspianalyse.py  
 ```
 
+If `.img` or `.png` are preferred just change file extension in the code, 
+or use after running `raspianalyse.py`
+```python
+>>> fig.savefig('sample.png')
+```
+
+or
+```python
+>>> fig.savefig('sample.img')
+```
+
+
+
 **Sample output**
 
-![Sample chart of a Raspberry Pi 4 with 1GB](data/sample.png)
+![Sample chart of a Raspberry Pi 4 with 1GB](charts/sample.png)
 
 
 <a href='#raspiinfo'>return to top</a>

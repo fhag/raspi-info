@@ -10,7 +10,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 from matplotlib import numpy as np
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 colfuncs = {'Core data': [re.compile(r'(?: \d{1,4}\.{1}\d{1} )'),
                           float,
@@ -115,9 +115,6 @@ def read_rawdata(rawdata):
 
 def add_textbox(ax, text):
     '''Add textbox to subplot'''
-    # ax.text(0.5, 0.5, text, fontsize=12, fontweight='bold',
-    #         horizontalalignment='center',
-    #         color='red', transform=ax.transAxes)
     ax.text(0.5, 0.5, text, fontsize=12, fontweight='bold',
             bbox=dict(facecolor='yellow', alpha=0.1,
                       edgecolor='red', linewidth=3,
@@ -127,11 +124,11 @@ def add_textbox(ax, text):
     return ax
 
 
-def plot_pdf(fname, path=''):
+def plot_pdf(fname, datapath='', chartpath=''):
     '''Create pdf and show charts'''
     print('Starting creating charts')
     A4portrait = (8.27, 11.69)
-    rawdata = get_rawdata(fname, path)
+    rawdata = get_rawdata(fname, datapath)
     title, title_fname, data = read_rawdata(rawdata)
     # nrofsupplots = len(data.keys()) - 1
     xvalues = data['Core data']
@@ -194,29 +191,27 @@ def plot_pdf(fname, path=''):
         ax.set_title(ax.get_title(), fontweight='bold')
         ax.set_ylabel(ax.get_ylabel(), fontweight='bold', fontsize=11)
     pdf_fname = title_fname.replace('.txt', '.pdf')
+    pdf_fname = pdf_fname.replace(datapath, chartpath)
+    try:
+        os.mkdir(chartpath)
+    except (FileExistsError, FileNotFoundError):
+        pass
     fig.savefig(pdf_fname)
     print('Charts save as pdf to: ', pdf_fname)
     return fig
 
 
 if __name__ == '__main__':
-    PATH = 'data/'
-    files = [file for file in os.listdir(PATH) if file.endswith('.txt')]
-    files = [file for file in files if '05-01' in file]
-    fname = files[0]
-    files = [fname]
-    for file in files:
-        # fig = plot_pdf(file, PATH)
+    DATAPATH = 'data/'
+    CHARTPATH = 'charts/'
+    fnames = [fname for fname in os.listdir(DATAPATH)
+              if fname.endswith('.txt')]
+    fnames = [fname for fname in fnames if '05-02' in fname]
+    for fname in fnames:
         try:
-            # rawdata = get_rawdata(PATH, fname)
-            # t1, t2, rd = read_rawdata(rawdata)
-
-            print(file)
-            fig = plot_pdf(file, PATH)
+            print(fname)
+            fig = plot_pdf(fname, datapath=DATAPATH, chartpath=CHARTPATH)
             plt.close()
         except KeyError:
-            print('Error for :', file)
+            print('Error for :', fname)
     fig.show()
-    # rawdata = get_rawdata(PATH, fname)
-    # t1, t2, rd = read_rawdata(rawdata)
-    # key = 'Volt:'

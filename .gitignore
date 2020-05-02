@@ -6,9 +6,9 @@ __pycache__
 **.txt
 first_tests/**
 **/.pylint*/**
+charts/**
+data/**
 
 # retain the following files
-!data/sample_log.txt
-!data/sampe_id.txt
-!data/sample_v.txt
-!data/sample.txt
+!data/sample*.txt
+!charts/sample*.*
