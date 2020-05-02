@@ -37,7 +37,35 @@ required by your Raspi.
 <h3 style='color:DodgerBlue'><b>Sample analysis</b></h3>
 
 
-<img src="charts/sample.png" alt="Sample chart" width="300"/>
+<img src="charts/sample_raspi41GB.png" alt="Sample chart" width="250"/>
+
+
+<table style="width:80%">
+  <tr>
+    <td>
+      <p><b>Raspi 4 - original power supply</b></p>
+      <img src="charts/sample_raspi41GB.png" alt="Nature" width="230">
+    </td>
+    <td>
+      <p><b>Raspi 3A+ - power supply ok</b></p>
+      <img src="charts/sample_raspi3a_goodps.png" alt="Sample chart" width="230"/>
+      </td>
+  </tr>
+
+  ---
+
+  <tr>
+    <td>
+      <p><b>Raspi 3A+ - poor cable</b></p>
+      <img src="charts/sample_raspi3a_poor_cable.png" alt="Nature" width="230">
+    </td>
+    <td>
+      <p><b>Raspi 3A+ - weak power supply</b></p>
+      <img src="charts/sample_raspi3a_10min.png" alt="Sample chart" width="230"/>
+    </td>
+  </tr>
+</table>
+
 
 <br>
 <a href='#raspiinfo'>return to top</a>
@@ -236,7 +264,30 @@ or
 
 **Sample output**
 
-![Sample chart of a Raspberry Pi 4 with 1GB](charts/sample.png)
+
+<table style="width:80%">
+  <tr>
+    <td>
+      <p><b>Raspi 4 - original power supply</b></p>
+      <img src="charts/sample_raspi41GB.png" alt="Nature" width="230">
+    </td>
+    <td>
+      <p><b>Raspi 3A+ - power supply ok</b></p>
+      <img src="charts/sample_raspi3a_goodps.png" alt="Sample chart" width="230"/>
+      </td>
+  </tr>
+
+  <tr>
+    <td>
+      <p><b>Raspi 3A+ - poor cable</b></p>
+      <img src="charts/sample_raspi3a_poor_cable.png" alt="Nature" width="230">
+    </td>
+    <td>
+      <p><b>Raspi 3A+ - weak power supply</b></p>
+      <img src="charts/sample_raspi3a_10min.png" alt="Sample chart" width="230"/>
+    </td>
+  </tr>
+</table>
 
 
 <a href='#raspiinfo'>return to top</a>
@@ -245,7 +296,7 @@ or
 
 
 
-<h2 id='vpy' style='color:DodgerBlue'><b>v.py</b></h2>
+<h2 id='v.py' style='color:DodgerBlue'><b>v.py</b></h2>
 
 Helps keeping track of version on different computer. Looks for `version`
 keyword in text files and for a version number of format `0.0.1`.
