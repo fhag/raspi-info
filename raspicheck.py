@@ -148,7 +148,7 @@ class RaspiCheck():
         '''Get temperature'''
         res = getattr(psutil, 'sensors_temperatures', '   - °C')
         try:
-            result = res()['cpu-thermal'][0]
+            result = res()['cpu_thermal'][0]
             res = f'Temp: {result.current:5.1f}°C'
         except TypeError:
             res = 'Temp:    - °C'
